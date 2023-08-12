@@ -1,0 +1,72 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - "data/*.mp3"
+  render:
+    - "*.qmd"
+    - "!*.Rmd"
+
+lang: ko
+date-format: "YYYY년 MM월 DD일"
+
+website:
+  title: "광명시 챗GPT"
+  site-url: https://statkclee.github.io/kwangmyung
+  page-navigation: true
+  reader-mode: true
+  favicon: "images/favicon/android-chrome-512x512.png"
+  google-analytics: "UA-229551680-1"
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    search: true
+    background: light
+    collapse-below: lg
+    type: light
+    logo: "images/favicon/android-chrome-512x512.png"
+    left:
+      - text: "커리큐럼"
+        menu:
+        - href: index.qmd
+          text: "과정소개"
+
+    right:
+      - icon: github
+        href: https://github.com/bit2r/chatGPT
+      - href: https://r2bit.com
+        text: "R사용자회"
+      - icon: github
+        text: "RTutor"
+        href: https://rtutor.ai/
+  page-footer:
+    center: |
+      [한국 R 사용자회](mailto:admin@r2bit.com)
+    left: |
+      [Quarto](https://quarto.org/) 개발
+    right: |
+      [Github 코드 저장소](https://github.com/statkclee/kwangmyung)
+    background: "#2780e3"
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: css/quarto.scss
+    code-link: true
+    code-fold: show
+    code-tools: true
+    code-block-bg: "white"
+    code-block-border-left: "#31BAE9"
+    highlight-style: github
+    toc: true
+
+
+bibliography: bibliography.bib
+csl: apa-single-spaced.csl
+link-citations: true
+
+execute:
+  freeze: auto
