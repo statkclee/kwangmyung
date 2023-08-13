@@ -40,8 +40,10 @@ editor_options:
 
 ## 생성형 AI 연구모임
 
-- 광명시
-- 12명 (4명 x 3 개팀)
+- 장소: 광명시
+- 참석인원: 12명 (4명 x 3 개팀)
+- 시간: 13:00 ~ 17:00 (4시간)
+
 
 ## 커리큘럼
 
@@ -57,7 +59,7 @@ curriculum_raw <- read_excel(glue::glue("{here::here()}/data/커리큘럼.xlsx")
 curriculum <- curriculum_raw %>% 
   fill(everything(), .direction="down") %>% 
   mutate(날짜 = as.Date(날짜)) %>% 
-  mutate(주차 = glue::glue("{주차} 주차"))
+  mutate(주차 = glue::glue("{주차} 회차"))
 
 ## 첫번째
 curriculum_first <- curriculum %>% 
