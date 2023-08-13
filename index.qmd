@@ -1,7 +1,134 @@
 ---
-title: "광명시 챗GPT 프로젝트"
-format: html
-editor: visual
+title: "챗GPT 데이터 사이언스"
+subtitle: "광명시 챗GPT 프로젝트"
+description: |
+  챗GPT 데이터 사이언스로 시정을 혁신할 프로젝트를 함께 합니다.
+author:
+  - name: 이광춘
+    url: https://www.linkedin.com/in/kwangchunlee/
+    affiliation: 한국 R 사용자회
+    affiliation-url: https://github.com/bit2r
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: true
+    code-overflow: wrap
+    toc: true
+    toc-depth: 3
+    toc-title: 목차
+    number-sections: true
+    highlight-style: github    
+    self-contained: false
+    default-image-extension: jpg
+filters:
+   - lightbox
+lightbox: auto
+link-citations: true
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
+    collapse: true
+    echo: false
+    comment: "#>" 
+    R.options:
+      knitr.graphics.auto_pdf: true
+editor_options: 
+  chunk_output_type: console
 ---
 
-# 웹사이트 제작
+## 생성형 AI 연구모임
+
+- 광명시
+- 12명 (4명 x 3 개팀)
+
+## 커리큘럼
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(gt)
+library(gtExtras)
+extrafont::loadfonts()
+
+curriculum_raw <- read_excel(glue::glue("{here::here()}/data/커리큘럼.xlsx"), sheet = "광명시")
+
+curriculum <- curriculum_raw %>% 
+  fill(everything(), .direction="down") %>% 
+  mutate(날짜 = as.Date(날짜)) %>% 
+  mutate(주차 = glue::glue("{주차} 주차"))
+
+## 첫번째
+curriculum_first <- curriculum %>% 
+  filter(dplyr::row_number() <=10)
+
+curriculum %>%   
+  gt(groupname_col = c("주차", "날짜")) %>% 
+    cols_align(align = "center") %>% 
+  opt_table_font(
+    font = list(
+      google_font(name = "Sunflower"),
+      "NanumGothic"
+    )
+  ) %>% 
+  gt_theme_pff() %>% 
+  tab_style(
+    style = list(
+      "font-variant: small-caps;"
+    ),
+    locations = cells_body(columns = everything())
+  ) %>% 
+  tab_options(
+    table.font.names = 'MaruBuri',
+    column_labels.font.weight = 'bold',
+    column_labels.font.size = 20,
+    heading.title.font.size = 16,
+    heading.subtitle.font.size = 14,
+    # table.font.color = 'steelblue',
+    source_notes.font.size = 10,
+    #source_notes.
+    table.font.size = 14) %>% 
+  tab_header(
+    title =
+      htmltools::tagList(
+        htmltools::tags$div(
+          style = htmltools::css(
+            `text-align` = "center"
+          ),
+          htmltools::HTML(
+            web_image("images/curriculum_logo.png")
+          )
+        ),
+        htmltools::tags$div(
+          htmltools::tags$strong("챗GPT 데이터 사이언스"),
+          "생성형 AI 연구모임"
+        )
+      )
+  )
+
+```
+
+
+## 참고 자료
+
+1. 데이터 사이언스
+    - GS 칼텍스 디지털 아카데미: <https://r2bit.com/curriculum/>
+    - 연세대학교 데이터 과학: <https://statkclee.github.io/yonsei/> <https://statkclee.github.io/yonsei2/>
+1. 챗GPT 데이터 사이언스
+    - 챗GPT PPT: <https://r2bit.com/bitSlide/>
+    - 챗GPT 디지털 글쓰기: <https://r2bit.com/quarto/>
+    - 챗GPT 디지털 출판: <https://r2bit.com/bitPublish/>
+    - 챗GPT 실습: <https://r2bit.com/gpt-edu/>
+    - 챗GPT 자료: <https://r2bit.com/chatGPT/>
+1. 인공지능 기초
+    - 데이터 과학 언플러그드 : <https://r2bit.com/book_unplugged/>
+    - 리보그 세상 - 블록 언어 &rarr; R/파이썬 : <https://statkclee.github.io/reeborg/>
+    - 데이터 과학 프로그래밍 : <https://r2bit.com/book_programming/>
+
+1. 커뮤니티    
+    - 공익법인 한국 R 사용자회: <https://r2bit.com/>
+    - 서울 R 미트업: <https://r2bit.com/seoul-r/>
+    - 한국 R 컨퍼런스: <https://use-r.kr/>
+    
+
