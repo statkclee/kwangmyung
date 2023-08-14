@@ -1,0 +1,149 @@
+---
+title: "재미날것 같은 통계학"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# 통계학
+
+## 추론통계
+
+## 요약통계
+
+### 범주형 변수
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(janitor)
+
+penguins |> 
+  drop_na() |> 
+  count(species, sex, sort = TRUE) |> 
+  pivot_wider(names_from = sex, values_from = n) |> 
+  mutate(합계 = female + male)  |> 
+  janitor::adorn_totals(where = "row", name = "합계") |> 
+  gt::gt()
+
+```
+
+### 연속형 변수
+
+```{r}
+weights_tbl <- penguins |> 
+  drop_na() |> 
+  group_by(species) |> 
+  summarise(평균체중 = mean(body_mass_g),
+            SD체중  = sd(body_mass_g),
+            최소체중 = min(body_mass_g),
+            최대체중 = max(body_mass_g))
+
+weights <- weights_tbl |> 
+  pull(평균체중)
+
+weights
+```
+
+남극에 서식중인 펭귄 3종의 평균 체중은 다음과 같습니다.
+
+- 아델리: `r scales::comma(weights[1])`
+- 턱끈: `r weights[2]`
+- 젠투: `r weights[3]`
+
+
+# 시각화
+
+## 상자그림
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species, y = body_mass_g)) +
+    geom_boxplot() +
+    geom_jitter(aes(color = species))
+```
+
+
+## 빈도수
+
+```{r}
+penguins |>
+  drop_na() |> 
+  count(species, sex) |> 
+  ggplot(aes(x = fct_reorder(species, -n), y = n, fill = sex)) +
+    geom_col(width=0.5) +
+    labs(x = "펭귄 종", y = "펭귄 빈도수",
+         fill = "암수",
+         title = "남극 서식 펭귄종 통계 빈도 분석") +
+    theme_minimal(base_family = "AppleGothic")
+```
+
+# 표본추출
+
+## SRS
+
+```{r}
+srs_penguins <- penguins |> 
+  drop_na() |> 
+  slice_sample(n = 100)
+```
+
+## 집락추출
+
+```{r}
+cluster_penguins <- penguins |> 
+  drop_na() |> 
+  mutate(cluster = cut(bill_length_mm, breaks = 10)) 
+
+# 1. 단계 집락추출
+clusters <- unique(cluster_penguins$cluster)
+clusters_sample <- sample(clusters, size = 3)
+
+# 2. 펭귄 추출
+cluster_penguins |> 
+  filter(cluster %in% clusters_sample) |> 
+  slice_sample(n = 10)
+```
+
+## 표본평균
+
+```{r}
+
+penguins |> 
+  drop_na() |> 
+  summarise(표본평균체중 = mean(body_mass_g ))
+
+trials <- rep(100, 1000)
+
+get_srs <- function(n_sample = 100) {
+  srs_penguins <- penguins |> 
+    slice_sample(n = n_sample)
+  
+  return(srs_penguins)
+}
+
+get_srs(100)
+
+get_mean <- function(dataframe) {
+  dataframe |>
+    summarise(표본평균체중 = mean(body_mass_g, na.rm = TRUE )) |> 
+    pull(표본평균체중)
+}
+
+
+trials |> 
+  enframe() |> 
+  mutate(sample = map(value, get_srs)) |> 
+  mutate(sample_mean = map_dbl(sample, get_mean)) |> 
+  summarise(mean(sample_mean))
+
+penguins |> 
+  drop_na() |> 
+  summarise(표본평균체중 = mean(body_mass_g ))
+
+```
+
+
+
+
