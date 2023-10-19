@@ -40,5 +40,82 @@
     "title": "챗GPT 데이터 사이언스",
     "section": "\n4 [신간도서] 챗GPT 유닉스 쉘",
     "text": "4 [신간도서] 챗GPT 유닉스 쉘\n\n\n\n\n\n\n\n“챗GPT 유닉스 쉘”은 단순한 기술서적이 아니고 지금 챗GPT AI 시대를 지탱하는 사고체계다. 컴퓨터의 대부인 IBM이 새로운 제국의 시대를 열었지만, 그 제국을 흔들었던 힘은 바로 ’유닉스’였다.\n유닉스는 레고와 닮았다. 한가지 기능에 특화된 레고블록 각각은 별볼일 없지만 레고블록을 조합하면 명작으로 재탄생한다. 레고를 이해하면 유닉스도 쉽게 이해되고 강력한 소프트웨어를 제작할 수 있다.\n피터 파커(스파이더맨)의 삼촌 벤자민 파커는 “큰 힘에는 큰 책임이 따른다.”는 명언을 남겼다. 자연어를 이해하는 챗GPT가 등장하며 큰 책임을 다하면서 큰 힘을 쓸 수 있는 여건이 마련되었다.\n이 책은 21세기 가장 섹시한 직업으로 불리는 ‘데이터 과학’ 분야를 주로 다루고 있지만, 챗GPT와 유닉스의 조합이 얼마나 강력한지 직접 체험함으로써 앞으로 펼쳐질 미래를 예측하는데도 도움을 줄 것이다.\n\n교보문고 바로가기"
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "챗GPT 데이터 사이언스",
+    "section": "",
+    "text": "2023년 9월 현소유자 사용본거지(상세)(USE_STRNGHLD_ADRES_NM) 혹은 현소유자 주소(상세)(OWNER_ADRES_NM) 두곳중 한 곳이 “경기도 광명시”인 차량을 대상으로 분석진행함.\n자료출처: 국토교통 통계누리 https://stat.molit.go.kr/portal/main/portalMain.do\n\n#&gt; # A tibble: 548 × 53\n#&gt;    ROW_ID  EXTRACT_DE CL_HMMD_IMP_SE_NM ORG_CAR_MAKER_KOR ORG_CAR_MAKER_ENG\n#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;            \n#&gt;  1 1000066 20230901   국산              현대              HYUNDAI          \n#&gt;  2 1000199 20230901   국산              현대              HYUNDAI          \n#&gt;  3 1000454 20230901   국산              기아              KIA              \n#&gt;  4 1001749 20230901   국산              기아              KIA              \n#&gt;  5 1001794 20230901   국산              현대              HYUNDAI          \n#&gt;  6 1001983 20230901   국산              현대              HYUNDAI          \n#&gt;  7 1002091 20230901   국산              기아              KIA              \n#&gt;  8 1002139 20230901   국산              현대              HYUNDAI          \n#&gt;  9 1002608 20230901   국산              현대              HYUNDAI          \n#&gt; 10 1002632 20230901   국산              현대              HYUNDAI          \n#&gt; # ℹ 538 more rows\n#&gt; # ℹ 48 more variables: CAR_MAKER_KOR &lt;chr&gt;, ORG_CAR_NATION &lt;chr&gt;,\n#&gt; #   CAR_NATION &lt;chr&gt;, CAR_MOEL_DT &lt;chr&gt;, CAR_MOEL_DT_ENG &lt;chr&gt;,\n#&gt; #   CAR_MODEL_KOR &lt;chr&gt;, CAR_MODEL_ENG &lt;chr&gt;, PROJECT_CD &lt;chr&gt;, CNM &lt;chr&gt;,\n#&gt; #   SPCF_MODEL_YEAR &lt;chr&gt;, FRST_REGIST_YEAR &lt;chr&gt;, FRST_REGIST_DE &lt;chr&gt;,\n#&gt; #   YBL_MD &lt;chr&gt;, JS &lt;chr&gt;, SSSGB &lt;chr&gt;, CAR_SZ &lt;chr&gt;, CAR_BT &lt;chr&gt;,\n#&gt; #   FUEL1 &lt;chr&gt;, FUEL2 &lt;chr&gt;, DSPLVL &lt;chr&gt;, GRBX_KND_NM &lt;chr&gt;, CBD_LT &lt;chr&gt;, …"
+  },
+  {
+    "objectID": "penguins.html",
+    "href": "penguins.html",
+    "title": "재미날것 같은 통계학",
+    "section": "",
+    "text": "코드library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.3     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n코드library(palmerpenguins)\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\n코드penguins |&gt; \n  drop_na() |&gt; \n  count(species, sex, sort = TRUE) |&gt; \n  pivot_wider(names_from = sex, values_from = n) |&gt; \n  mutate(합계 = female + male)  |&gt; \n  janitor::adorn_totals(where = \"row\", name = \"합계\") |&gt; \n  gt::gt()\n\n\n\n\n\n\nspecies\n      female\n      male\n      합계\n    \n\n\nAdelie\n73\n73\n146\n\n\nGentoo\n58\n61\n119\n\n\nChinstrap\n34\n34\n68\n\n\n합계\n165\n168\n333\n\n\n\n\n\n\n\n\n코드weights_tbl &lt;- penguins |&gt; \n  drop_na() |&gt; \n  group_by(species) |&gt; \n  summarise(평균체중 = mean(body_mass_g),\n            SD체중  = sd(body_mass_g),\n            최소체중 = min(body_mass_g),\n            최대체중 = max(body_mass_g))\n\nweights &lt;- weights_tbl |&gt; \n  pull(평균체중)\n\nweights\n\n[1] 3706.164 3733.088 5092.437\n\n\n남극에 서식중인 펭귄 3종의 평균 체중은 다음과 같습니다.\n\n아델리: 3,706\n턱끈: 3733.0882353\n젠투: 5092.4369748"
+  },
+  {
+    "objectID": "penguins.html#요약통계",
+    "href": "penguins.html#요약통계",
+    "title": "재미날것 같은 통계학",
+    "section": "",
+    "text": "코드library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.3     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n코드library(palmerpenguins)\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\n코드penguins |&gt; \n  drop_na() |&gt; \n  count(species, sex, sort = TRUE) |&gt; \n  pivot_wider(names_from = sex, values_from = n) |&gt; \n  mutate(합계 = female + male)  |&gt; \n  janitor::adorn_totals(where = \"row\", name = \"합계\") |&gt; \n  gt::gt()\n\n\n\n\n\n\nspecies\n      female\n      male\n      합계\n    \n\n\nAdelie\n73\n73\n146\n\n\nGentoo\n58\n61\n119\n\n\nChinstrap\n34\n34\n68\n\n\n합계\n165\n168\n333\n\n\n\n\n\n\n\n\n코드weights_tbl &lt;- penguins |&gt; \n  drop_na() |&gt; \n  group_by(species) |&gt; \n  summarise(평균체중 = mean(body_mass_g),\n            SD체중  = sd(body_mass_g),\n            최소체중 = min(body_mass_g),\n            최대체중 = max(body_mass_g))\n\nweights &lt;- weights_tbl |&gt; \n  pull(평균체중)\n\nweights\n\n[1] 3706.164 3733.088 5092.437\n\n\n남극에 서식중인 펭귄 3종의 평균 체중은 다음과 같습니다.\n\n아델리: 3,706\n턱끈: 3733.0882353\n젠투: 5092.4369748"
+  },
+  {
+    "objectID": "penguins.html#상자그림",
+    "href": "penguins.html#상자그림",
+    "title": "재미날것 같은 통계학",
+    "section": "상자그림",
+    "text": "상자그림\n\n코드penguins |&gt; \n  ggplot(aes(x = species, y = body_mass_g)) +\n    geom_boxplot() +\n    geom_jitter(aes(color = species))\n\nWarning: Removed 2 rows containing non-finite values (`stat_boxplot()`).\n\n\nWarning: Removed 2 rows containing missing values (`geom_point()`)."
+  },
+  {
+    "objectID": "penguins.html#빈도수",
+    "href": "penguins.html#빈도수",
+    "title": "재미날것 같은 통계학",
+    "section": "빈도수",
+    "text": "빈도수\n\n코드penguins |&gt;\n  drop_na() |&gt; \n  count(species, sex) |&gt; \n  ggplot(aes(x = fct_reorder(species, -n), y = n, fill = sex)) +\n    geom_col(width=0.5) +\n    labs(x = \"펭귄 종\", y = \"펭귄 빈도수\",\n         fill = \"암수\",\n         title = \"남극 서식 펭귄종 통계 빈도 분석\") +\n    theme_minimal(base_family = \"AppleGothic\")\n\nWarning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family\nnot found in Windows font database\n\nWarning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family\nnot found in Windows font database\n\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\n\nWarning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family\nnot found in Windows font database\n\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\n\nWarning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :\nfont family not found in Windows font database\n\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database\n\nWarning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font\nfamily not found in Windows font database"
+  },
+  {
+    "objectID": "penguins.html#srs",
+    "href": "penguins.html#srs",
+    "title": "재미날것 같은 통계학",
+    "section": "SRS",
+    "text": "SRS\n\n코드srs_penguins &lt;- penguins |&gt; \n  drop_na() |&gt; \n  slice_sample(n = 100)"
+  },
+  {
+    "objectID": "penguins.html#집락추출",
+    "href": "penguins.html#집락추출",
+    "title": "재미날것 같은 통계학",
+    "section": "집락추출",
+    "text": "집락추출\n\n코드cluster_penguins &lt;- penguins |&gt; \n  drop_na() |&gt; \n  mutate(cluster = cut(bill_length_mm, breaks = 10)) \n\n# 1. 단계 집락추출\nclusters &lt;- unique(cluster_penguins$cluster)\nclusters_sample &lt;- sample(clusters, size = 3)\n\n# 2. 펭귄 추출\ncluster_penguins |&gt; \n  filter(cluster %in% clusters_sample) |&gt; \n  slice_sample(n = 10)\n\n# A tibble: 10 × 9\n   species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Gentoo    Biscoe           46.3          15.8               215        5050\n 2 Chinstrap Dream            48.1          16.4               199        3325\n 3 Gentoo    Biscoe           45.5          13.7               214        4650\n 4 Chinstrap Dream            45.5          17                 196        3500\n 5 Gentoo    Biscoe           43.2          14.5               208        4450\n 6 Gentoo    Biscoe           59.6          17                 230        6050\n 7 Gentoo    Biscoe           45            15.4               220        5050\n 8 Gentoo    Biscoe           46.6          14.2               210        4850\n 9 Gentoo    Biscoe           46.2          14.1               217        4375\n10 Chinstrap Dream            46.4          18.6               190        3450\n# ℹ 3 more variables: sex &lt;fct&gt;, year &lt;int&gt;, cluster &lt;fct&gt;"
+  },
+  {
+    "objectID": "penguins.html#표본평균",
+    "href": "penguins.html#표본평균",
+    "title": "재미날것 같은 통계학",
+    "section": "표본평균",
+    "text": "표본평균\n\n코드penguins |&gt; \n  drop_na() |&gt; \n  summarise(표본평균체중 = mean(body_mass_g ))\n\n# A tibble: 1 × 1\n  표본평균체중\n         &lt;dbl&gt;\n1        4207.\n\n코드trials &lt;- rep(100, 1000)\n\nget_srs &lt;- function(n_sample = 100) {\n  srs_penguins &lt;- penguins |&gt; \n    slice_sample(n = n_sample)\n  \n  return(srs_penguins)\n}\n\nget_srs(100)\n\n# A tibble: 100 × 8\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           34.6          21.1               198        4400\n 2 Gentoo  Biscoe              42.8          14.2               209        4700\n 3 Adelie  Torgersen           41.8          19.4               198        4450\n 4 Adelie  Biscoe              42            19.5               200        4050\n 5 Gentoo  Biscoe              49.8          15.9               229        5950\n 6 Adelie  Dream               39.2          18.6               190        4250\n 7 Gentoo  Biscoe              46.8          16.1               215        5500\n 8 Gentoo  Biscoe              47.3          15.3               222        5250\n 9 Adelie  Dream               36.2          17.3               187        3300\n10 Adelie  Biscoe              38.8          17.2               180        3800\n# ℹ 90 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n코드get_mean &lt;- function(dataframe) {\n  dataframe |&gt;\n    summarise(표본평균체중 = mean(body_mass_g, na.rm = TRUE )) |&gt; \n    pull(표본평균체중)\n}\n\n\ntrials |&gt; \n  enframe() |&gt; \n  mutate(sample = map(value, get_srs)) |&gt; \n  mutate(sample_mean = map_dbl(sample, get_mean)) |&gt; \n  summarise(mean(sample_mean))\n\n# A tibble: 1 × 1\n  `mean(sample_mean)`\n                &lt;dbl&gt;\n1               4200.\n\n코드penguins |&gt; \n  drop_na() |&gt; \n  summarise(표본평균체중 = mean(body_mass_g ))\n\n# A tibble: 1 × 1\n  표본평균체중\n         &lt;dbl&gt;\n1        4207."
+  },
+  {
+    "objectID": "analysis.html#현황",
+    "href": "analysis.html#현황",
+    "title": "챗GPT 데이터 사이언스",
+    "section": "\n2.1 현황",
+    "text": "2.1 현황\n2023년 9월 신규등록 137,617 중 광명시 관련 548 대가 신규등록되었다."
+  },
+  {
+    "objectID": "analysis.html#사용본거지와-주소",
+    "href": "analysis.html#사용본거지와-주소",
+    "title": "챗GPT 데이터 사이언스",
+    "section": "\n2.2 사용본거지와 주소",
+    "text": "2.2 사용본거지와 주소\n\n\n\n\n\n\n\n사용본거지\n      주소\n      대수\n    \n\n\n경기도 광명시\n경기도 고양시 일산동구\n1\n\n\n경기도 광명시\n경기도 광명시\n536\n\n\n경기도 광명시\n서울특별시 금천구\n1\n\n\n경기도 부천시\n경기도 광명시\n1\n\n\n서울특별시 관악구\n경기도 광명시\n1\n\n\n서울특별시 구로구\n경기도 광명시\n4\n\n\n서울특별시 양천구\n경기도 광명시\n1\n\n\n서울특별시 영등포구\n경기도 광명시\n3"
+  },
+  {
+    "objectID": "analysis.html#소유구분",
+    "href": "analysis.html#소유구분",
+    "title": "챗GPT 데이터 사이언스",
+    "section": "\n2.3 소유구분",
+    "text": "2.3 소유구분\n\n\n\n\n\n\n\n일치여부\n      개인\n      법인및사업자\n    \n\n\nFALSE\n7\n5\n\n\nTRUE\n470\n66\n\n\n\n\n\n\n\n2.3.1 법인및사업자\n\n\n\n\n\n\n\n모델명\n      등록월\n      등록용도\n      사용본거지\n      소유자주소\n    \n\n\n아반떼\n202309\n자가용\n서울특별시 영등포구\n경기도 광명시\n\n\nK5\n202309\n렌트\n경기도 광명시\n경기도 고양시 일산동구\n\n\n싼타페\n202309\n렌트\n경기도 부천시\n경기도 광명시\n\n\nNX\n202309\n자가용\n경기도 광명시\n서울특별시 금천구\n\n\n아반떼\n202309\n자가용\n서울특별시 영등포구\n경기도 광명시\n\n\n\n\n\n\n\n2.3.2 개인\n\n\n\n\n\n\n\n모델명\n      등록월\n      등록용도\n      사용본거지\n      소유자주소\n    \n\n\n그랜저\n202309\n여객(승용)_택시\n서울특별시 관악구\n경기도 광명시\n\n\nK8\n202309\n여객(승용)_택시\n서울특별시 양천구\n경기도 광명시\n\n\nK8\n202309\n여객(승용)_택시\n서울특별시 구로구\n경기도 광명시\n\n\nK8\n202309\n여객(승용)_택시\n서울특별시 구로구\n경기도 광명시\n\n\n스포티지\n202309\n여객(승용)_택시\n서울특별시 영등포구\n경기도 광명시\n\n\nK5\n202309\n여객(승용)_택시\n서울특별시 구로구\n경기도 광명시\n\n\nK8\n202309\n여객(승용)_택시\n서울특별시 구로구\n경기도 광명시"
   }
 ]

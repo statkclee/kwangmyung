@@ -2,6 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://statkclee.github.io/kwangmyung/index.html</loc>
-    <lastmod>2023-08-14T02:31:44.095Z</lastmod>
+    <lastmod>2023-10-19T07:41:39.263Z</lastmod>
+  </url>
+  <url>
+    <loc>https://statkclee.github.io/kwangmyung/analysis.html</loc>
+    <lastmod>2023-10-19T07:44:58.267Z</lastmod>
+  </url>
+  <url>
+    <loc>https://statkclee.github.io/kwangmyung/penguins.html</loc>
+    <lastmod>2023-10-19T07:10:42.605Z</lastmod>
   </url>
 </urlset>

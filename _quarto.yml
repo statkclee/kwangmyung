@@ -31,6 +31,8 @@ website:
         menu:
         - href: index.qmd
           text: "과정소개"
+      - href: analysis.qmd
+        text: "분석"
 
     right:
       - icon: github

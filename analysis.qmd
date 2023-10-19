@@ -1,0 +1,108 @@
+---
+title: "챗GPT 데이터 사이언스"
+subtitle: "분석"
+description: |
+  불법명의자동차(대포차) 분석 
+author:
+  - name: 이광춘
+    url: https://www.linkedin.com/in/kwangchunlee/
+    affiliation: 한국 R 사용자회
+    affiliation-url: https://github.com/bit2r
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: true
+    code-overflow: wrap
+    toc: true
+    toc-depth: 3
+    toc-title: 목차
+    number-sections: true
+    highlight-style: github    
+    self-contained: false
+    default-image-extension: jpg
+filters:
+   - lightbox
+lightbox: auto
+link-citations: true
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
+    collapse: true
+    echo: false
+    comment: "#>" 
+    R.options:
+      knitr.graphics.auto_pdf: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# 데이터
+
+2023년 9월 현소유자 사용본거지(상세)(USE_STRNGHLD_ADRES_NM) 혹은 
+현소유자 주소(상세)(OWNER_ADRES_NM) 두곳중 한 곳이 "경기도 광명시"인 차량을 대상으로 분석진행함.
+
+[자료출처: 국토교통 통계누리 <https://stat.molit.go.kr/portal/main/portalMain.do>]{.aside}
+
+```{r}
+library(readxl)
+library(tidyverse)
+
+car_raw <- readxl::read_excel("data/(AB정제)신규_이전등록DB_202309.xlsx")
+
+km_car <- car_raw |> 
+  slice(2:n()) |> 
+  filter(str_detect(USE_STRNGHLD_ADRES_NM, "경기도 광명시") |
+         str_detect(OWNER_ADRES_NM, "경기도 광명시")) 
+
+km_car
+
+```
+
+# 분석
+
+## 현황
+
+2023년 9월 신규등록 `r scales::comma(nrow(car_raw) - 1)` 중 광명시 관련 `r nrow(km_car)` 대가 신규등록되었다.
+
+## 사용본거지와 주소
+
+```{r}
+km_car |> 
+  count(USE_STRNGHLD_ADRES_NM, OWNER_ADRES_NM, name = "대수") |> 
+  rename(사용본거지 = USE_STRNGHLD_ADRES_NM,
+         주소 = OWNER_ADRES_NM)  |> 
+  gt::gt()
+```
+
+
+## 소유구분
+
+```{r}
+km_car |> 
+  mutate(일치여부 = ifelse(USE_STRNGHLD_ADRES_NM == OWNER_ADRES_NM, TRUE, FALSE)) |> 
+  count(SOU_GB, 일치여부) |> 
+  pivot_wider(names_from=SOU_GB, values_from = n) |> 
+  gt::gt()
+```
+
+### 법인및사업자
+
+```{r}
+km_car |> 
+  mutate(일치여부 = ifelse(USE_STRNGHLD_ADRES_NM == OWNER_ADRES_NM, TRUE, FALSE)) |> 
+  filter(SOU_GB == "법인및사업자", 일치여부 == FALSE) |> 
+  select(모델명=CAR_MOEL_DT, 등록월=FRST_REGIST_DE, 등록용도=YDGB, 사용본거지=USE_STRNGHLD_ADRES_NM,소유자주소=OWNER_ADRES_NM) |> 
+  gt::gt()
+```
+
+### 개인
+
+```{r}
+km_car |> 
+  mutate(일치여부 = ifelse(USE_STRNGHLD_ADRES_NM == OWNER_ADRES_NM, TRUE, FALSE)) |> 
+  filter(SOU_GB == "개인", 일치여부 == FALSE) |> 
+  select(모델명=CAR_MOEL_DT, 등록월=FRST_REGIST_DE, 등록용도=YDGB, 사용본거지=USE_STRNGHLD_ADRES_NM,소유자주소=OWNER_ADRES_NM) |> 
+  gt::gt()
+```

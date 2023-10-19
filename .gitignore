@@ -46,3 +46,8 @@ po/*~
 rsconnect/
 
 /.quarto/
+
+
+data/등록DB_raw_202309.xlsx
+data/(AB정제)신규_이전등록DB_202309.xlsx
+
